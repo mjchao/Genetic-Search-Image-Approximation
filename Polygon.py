@@ -17,20 +17,39 @@ specified as a tuple with four integers: (r, g, b, a).
 '''
 class Polygon( object ):
     
+    '''
+    Returns a random coordinate (x, y) with x value in range
+    [0 , maxX) , [0 , maxY)
+    '''
+    @staticmethod
+    def rand_xy( maxX , maxY ):
+        return ( randint( 0 , maxX ) , randint( 0 , maxY ) )
     
+    '''
+    Returns a random (r, g, b, a) value
+    '''
+    @staticmethod
+    def rand_rgba():
+        return ( randint( 0 , 256 ) , randint( 0 , 256 ) , randint( 0 , 256 ) , uniform( 0 , 1 ) )
+    
+    '''
+    Returns a random triangle
+    '''
     @staticmethod
     def rand_triangle( maxX , maxY ):
-        x1 = randint( 0 , maxX )
-        y1 = randint( 0 , maxY )
-        x2 = randint( 0 , maxX )
-        y2 = randint( 0 , maxY )
-        x3 = randint( 0 , maxX )
-        y3 = randint( 0 , maxY )
-        r = randint( 0 , 255 )
-        g = randint( 0 , 255 )
-        b = randint( 0 , 255 )
-        a = uniform( 0 , 1 )
-        return Polygon( [ (x1 , y1) , (x2 , y2) , (x3 , y3) ] , (r, g, b, a) )
+        return Polygon.rand_n_gon( 3 , maxX , maxY )
+    
+    '''
+    Returns a random n-gon with n vertices. The vertices may not be in the
+    correct order, though.
+    '''
+    @staticmethod
+    def rand_n_gon( n , maxX , maxY ):
+        vertices = []
+        for i in range( 0 , n ):
+            vertices.append( Polygon.rand_xy( maxX , maxY ) )
+        return Polygon( vertices  , Polygon.rand_rgba() )
+        
     
     '''
     Creates a polygon.
