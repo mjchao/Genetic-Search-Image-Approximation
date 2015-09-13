@@ -17,9 +17,11 @@ class GeneticCode( object ):
     Creates a GeneticCode object. By default, it's a random list of N
     triangles.
     '''
-    #TODO not correct code!
-    def __init__( self , polygons = [ Polygon.rand_triangle( IMG_WIDTH , IMG_HEIGHT ) ] * N ):
-        self._polygons = polygons
+    def __init__( self , polygons = None ):
+        if polygons is None:
+            self._polygons = [ Polygon.rand_triangle( IMG_WIDTH , IMG_HEIGHT ) for _ in range( 0 , N ) ]
+        else:
+            self._polygons = polygons
         self._fitness = -1
         pass
     

@@ -45,18 +45,22 @@ class Polygon( object ):
     '''
     @staticmethod
     def rand_n_gon( n , maxX , maxY ):
-        vertices = []
-        for i in range( 0 , n ):
-            vertices.append( Polygon.rand_xy( maxX , maxY ) )
-        return Polygon( vertices  , Polygon.rand_rgba() )
+        return Polygon( [Polygon.rand_xy( maxX , maxY) for _ in range( 0 , n )]  , Polygon.rand_rgba() )
         
     
     '''
     Creates a polygon.
     '''
-    def __init__( self , vertices = [ (0,0) , (0,0) , (0,0) ] , color = (0 , 0 , 0 , 0) ):
-        self._vertices = vertices
-        self._color = color
+    def __init__( self , vertices = None , color = None ):
+        if vertices is None:
+            self._vertices = [Polygon.rand_xy(IMG_WIDTH , IMG_HEIGHT) for _ in range( 0 , 3 ) ]
+        else:
+            self._vertices = vertices
+            
+        if color is None:
+            self._color = Polygon.rand_rgba()
+        else :
+            self._color = color
         
     '''
     Draws this polygon onto the screen.
