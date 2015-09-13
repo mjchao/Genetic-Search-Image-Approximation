@@ -5,9 +5,9 @@ Created on Sep 12, 2015
 '''
 
 import pygame
-from pygame.locals import *
+from Parameters import IMG_WIDTH , IMG_HEIGHT
+from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
 from random import randint , uniform
-from base64 import test1
 
 '''
 Represents a polygon with some vertices and filled with a given color.
@@ -15,7 +15,7 @@ Vertices are specified as ordered pairs of floats. The color is
 specified as a tuple with four integers: (r, g, b, a).
 
 '''
-class Polygon:
+class Polygon( object ):
     
     
     @staticmethod
@@ -43,7 +43,7 @@ class Polygon:
     Draws this polygon onto the screen.
     '''
     def draw( self , display ):
-        surface = pygame.surface.Surface( (500, 500) , flags = pygame.SRCALPHA )
+        surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
         surface.set_alpha( self._color[ 3 ] )
         pygame.draw.polygon( surface , self._color[0:3] , self._vertices )
         display.blit( surface , (0, 0) )
@@ -55,7 +55,7 @@ class Polygon:
 Unit testing
 '''
 def main():
-    test1 = Polygon.rand_triangle( 100 , 100 )
+    test1 = Polygon.rand_triangle( IMG_WIDTH , IMG_HEIGHT )
     test2 = Polygon( [ (0, 0) , (0 , 10) , (10, 10) ] , (0 , 0 , 0 , 1 ) )
     pygame.init()
     screen = pygame.display.set_mode( (100, 100) )
