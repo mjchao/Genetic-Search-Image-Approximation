@@ -7,7 +7,7 @@ Created on Sep 12, 2015
 import pygame
 from Parameters import IMG_WIDTH , IMG_HEIGHT
 from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
-from random import randint , uniform
+from random import randint
 
 '''
 Represents a polygon with some vertices and filled with a given color.
@@ -30,7 +30,7 @@ class Polygon( object ):
     '''
     @staticmethod
     def rand_rgba():
-        return ( randint( 0 , 256 ) , randint( 0 , 256 ) , randint( 0 , 256 ) , uniform( 0 , 1 ) )
+        return ( randint( 0 , 255 ) , randint( 0 , 255 ) , randint( 0 , 255 ) , randint( 0 , 255 ) )
     
     '''
     Returns a random triangle
@@ -70,6 +70,25 @@ class Polygon( object ):
         surface.set_alpha( self._color[ 3 ] )
         pygame.draw.polygon( surface , self._color[0:3] , self._vertices )
         display.blit( surface , (0, 0) )
+     
+    '''
+    Returns the number of vertices this polygon has. 
+    '''   
+    def num_vertices( self ):
+        return len( self._vertices )
+      
+    '''
+    Returns the color of this polygon as an (r, g, b, a) tuple
+    '''
+    def get_color( self ):
+        return self._color  
+    '''
+    Sets the color of this polygon.
+    
+    @param color - the (r, g, b, a) color for this polygon as a tuple
+    '''
+    def set_color( self , color ):
+        self._color = color
         
     def __str__( self ):
         return "Polygon { Vertices = " + str( self._vertices ) + ", Color = " + str( self._color ) + "}"
@@ -79,7 +98,7 @@ Unit testing
 '''
 def main():
     test1 = Polygon.rand_triangle( IMG_WIDTH , IMG_HEIGHT )
-    test2 = Polygon( [ (0, 0) , (0 , 10) , (10, 10) ] , (0 , 0 , 0 , 1 ) )
+    test2 = Polygon( [ (0, 0) , (0, 10) , (10, 10) ] , (0 , 0 , 0 , 1 ) )
     pygame.init()
     screen = pygame.display.set_mode( (100, 100) )
     screen.fill( (255, 255, 255) )

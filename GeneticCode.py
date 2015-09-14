@@ -14,6 +14,13 @@ objects.
 class GeneticCode( object ):
     
     '''
+    '''
+    @staticmethod
+    def rand_genetic_code_with_n_gons( n ):
+        polygons = [ Polygon.rand_n_gon( n , IMG_WIDTH , IMG_HEIGHT ) for _ in range( 0 , N ) ]
+        return GeneticCode( polygons )
+    
+    '''
     Creates a GeneticCode object. By default, it's a random list of N
     triangles.
     '''
