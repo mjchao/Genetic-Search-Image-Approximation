@@ -5,7 +5,6 @@ Created on Sep 12, 2015
 '''
 
 from Parameters import IMG_WIDTH , IMG_HEIGHT
-from GeneticCode import GeneticCode 
 from Polygon import Polygon
 from random import randint
 from bsddb import db
@@ -118,6 +117,7 @@ class Mutator( object ):
 Unit testing 
 '''
 def main():
+    from GeneticCode import GeneticCode 
     unmutated = GeneticCode()
     mutated = copy.deepcopy( unmutated )
     
@@ -157,6 +157,8 @@ def main():
     
     print str( unmutated )
     print str( mutated )
+    
+    print "Mutator unit testing passed."
 
 if __name__ == "__main__" : main()
     

@@ -3,8 +3,11 @@ Created on Sep 12, 2015
 
 @author: mjchao
 '''
+from Mutator import Mutator
 from Parameters import IMG_WIDTH , IMG_HEIGHT , N
 from Polygon import Polygon
+from random import uniform
+import copy
 
 '''
 Represents a Genetic Code to be used in the genetic search.
@@ -13,7 +16,10 @@ objects.
 '''
 class GeneticCode( object ):
     
+    MUTATION_PROBABILITY = 0.9
+    
     '''
+    Creates a random GeneticCode with N n-gons.
     '''
     @staticmethod
     def rand_genetic_code_with_n_gons( n ):
@@ -37,7 +43,9 @@ class GeneticCode( object ):
     with a random mutation.
     '''
     def mutate( self ):
-        pass
+        randVal = uniform( 0 , 1 )
+        if ( randVal <= GeneticCode.MUTATION_PROBABILITY ):
+            Mutator.mutate( self )
     
     '''
     Gets the polygon at the given index in the list of polygons
@@ -96,7 +104,20 @@ class GeneticCode( object ):
 Unit Testing
 '''
 def main():
-    test = GeneticCode()
-    print test 
+    unmutated = GeneticCode.rand_genetic_code_with_n_gons( 5 )
+    
+    GeneticCode.MUTATION_PROBABILITY = 1
+    mutated = copy.deepcopy( unmutated )
+    mutated.mutate()
+    assert str( unmutated ) != str( mutated )
+    
+    GeneticCode.MUTATION_PROBABILITY = 0
+    mutated = copy.deepcopy( unmutated )
+    mutated.mutate()
+    assert str( unmutated ) == str( mutated )
+    
+    
+    
+    print "Genetic code unit testing passed."
 
 if __name__ == "__main__" : main()
