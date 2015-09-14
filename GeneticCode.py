@@ -71,7 +71,7 @@ class GeneticCode( object ):
             return self._fitness
         else:
             #TODO
-            pass
+            return 0
          
     '''
     Returns the number of polygons of which this
