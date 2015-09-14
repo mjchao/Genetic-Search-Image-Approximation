@@ -6,6 +6,8 @@ Created on Sep 12, 2015
 from Mutator import Mutator
 from Parameters import IMG_WIDTH , IMG_HEIGHT , N
 from Polygon import Polygon
+
+import random
 from random import uniform
 import copy
 
@@ -83,9 +85,8 @@ class GeneticCode( object ):
     polygon with traits from both parent polygons.
     '''
     @staticmethod
-    def cross( polygon1 , polygon2 ):
-        pass
-        #TODO
+    def cross( code1 , code2 ):
+        return GeneticCode.crossN( code1 , code2 )
         
     '''
     Crosses an arbitrary number of polygons and
@@ -93,9 +94,18 @@ class GeneticCode( object ):
     parent polygons.
     '''
     @staticmethod
-    def crossN( *polygons ):
-        pass
-        #TODO
+    def crossN( *codes ):
+        numParents = len( codes )
+        partitions = random.sample( range( 0 , N ) , numParents-1 )
+        partitions.sort()
+        partitions = [0] + partitions
+        partitions.append( N )
+        
+        childPolygons = []
+        for i in range( 0 , numParents ):
+            childPolygons = childPolygons + copy.deepcopy( codes[ i ]._polygons[ partitions[i] : partitions[i+1] ] )
+
+        return GeneticCode( childPolygons )
         
     def __str__( self ):
         return "GeneticCode {Polygons = " + ', '.join( str(x) for x in self._polygons ) + ", fitness = " + str( self._fitness ) + "}"
@@ -116,7 +126,17 @@ def main():
     mutated.mutate()
     assert str( unmutated ) == str( mutated )
     
+    parent1 = GeneticCode.rand_genetic_code_with_n_gons( 4 )
+    parent2 = GeneticCode.rand_genetic_code_with_n_gons( 4 )
+    parent3 = GeneticCode.rand_genetic_code_with_n_gons( 4 )
+    child = GeneticCode.crossN( parent1 , parent2 , parent3 )
+    print str( parent1 )
+    print str( parent2 )
+    print str( parent3 )
+    print str( child )
     
+    child = GeneticCode.cross( parent1 , parent2 )
+    print str( child )
     
     print "Genetic code unit testing passed."
 
