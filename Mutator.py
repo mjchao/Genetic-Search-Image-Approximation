@@ -101,9 +101,6 @@ class Mutator( object ):
         else:
             vertexIdx = randint( 0 , len( polygon._vertices )-1 )
             del polygon._vertices[ vertexIdx ]
-   
-    
-    #mutationsList = [ Mutator.__mutate1__ ]
        
     '''
     Selects a random mutation to apply to a polygon.
@@ -113,7 +110,10 @@ class Mutator( object ):
     '''
     @staticmethod
     def mutate( code ):
-        pass
+        mutationsList = [ Mutator.__mutate1__ , Mutator.__mutate2__ , Mutator.__mutate3__ ,\
+                          Mutator.__mutate4__ , Mutator.__mutate5__ , Mutator.__mutate6__ ]
+        mutationIdx = randint( 0 , len( mutationsList )-1 )
+        mutationsList[ mutationIdx ]( code )
 '''
 Unit testing 
 '''
@@ -149,6 +149,10 @@ def main():
     unmutated = GeneticCode.rand_genetic_code_with_n_gons( 4 )
     mutated = copy.deepcopy( unmutated )
     Mutator.__mutate6__( mutated )
+    assert str( unmutated ) != str( mutated )
+    
+    mutated = copy.deepcopy( unmutated )
+    Mutator.mutate( mutated )
     assert str( unmutated ) != str( mutated )
     
     print str( unmutated )
