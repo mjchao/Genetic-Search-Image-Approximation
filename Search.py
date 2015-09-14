@@ -33,7 +33,7 @@ class Search( object ):
             
             #keep N best states
             codes.sort( Search.fitness_comparator )
-            codes = codes[ 0:N-1 ]
+            codes = codes[ 0:N ]
             
             #repeat T times 
 
