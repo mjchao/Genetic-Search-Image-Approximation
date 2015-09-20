@@ -68,11 +68,11 @@ class Mutator( object ):
         for polygon in code._polygons:
             for i in range( 0 , len( polygon._vertices ) ):
                 currX = polygon._vertices[ i ][ 0 ]
-                dx = randint( -9 , 9 )
+                dx = randint( -5 , 5 )
                 newX = currX + dx
                 
                 currY = polygon._vertices[ i ][ 1 ]
-                dy = randint( -9 , 9 )
+                dy = randint( -5 , 5 )
                 newY = currY + dy
                 
                 polygon._vertices[ i ] = (newX , newY)

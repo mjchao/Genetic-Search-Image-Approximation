@@ -13,7 +13,7 @@ def renderPolygon(image_buffer, polygon):
 
 ## Converts an image surface to a pixel array
 def convertToPixelArray(image_surface):
-    return pygame.surfarray.array3d(image_surface).reshape(image_surface.get_width() * image_surface.get_height() * 3)/255.0
+    return pygame.surfarray.pixels3d(image_surface).reshape(image_surface.get_width() * image_surface.get_height() * 3)/255.0
 
 
 ## Returns Euclidean distance between two pixel arrays
@@ -24,3 +24,12 @@ def euclideanDistance(PixelArray1, PixelArray2):
 ## Returns an image surface read from a file
 def loadImage(filename):
     return pygame.image.load(filename)
+
+'''
+Saves a surface  
+'''
+def save_surface( image , filename ):
+    pygame.image.save( image , filename )
+
+def display():
+    pass

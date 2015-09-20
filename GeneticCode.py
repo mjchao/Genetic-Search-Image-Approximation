@@ -67,9 +67,19 @@ class GeneticCode( object ):
     def set( self , idx , newPolygon ):
         self._polygons[ idx ] = newPolygon
         
+    '''
+    Draws the image represented by this genetic code onto a screen.
+    '''
     def draw_onto_screen( self , display ):
         for polygon in self._polygons:
             polygon.draw( display )
+            
+    '''
+    Draws the image represented by this genetic code onto a surface.
+    '''
+    def draw_onto_surface( self , surf ):
+        for polygon in self._polygons:
+            polygon.draw_onto_surface( surf )
     '''
     Returns the fitness score of this genetic code.
     '''
@@ -78,10 +88,10 @@ class GeneticCode( object ):
             return self._fitness
         else:
             surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
-            for polygon in self._polygons:
-                polygon.draw_onto_surface( surface )
+            self.draw_onto_surface( surface )
             self._pixelArray = convertToPixelArray( surface )
-            return euclideanDistance( self._pixelArray , IMG_PIXEL_ARRAY )
+            self._fitness = -1*euclideanDistance( self._pixelArray , IMG_PIXEL_ARRAY )
+            return self._fitness
          
     '''
     Returns the number of polygons of which this
