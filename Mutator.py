@@ -7,7 +7,6 @@ Created on Sep 12, 2015
 from Parameters import IMG_WIDTH , IMG_HEIGHT
 from Polygon import Polygon
 from random import randint
-from bsddb import db
 import copy
 
 class Mutator( object ):

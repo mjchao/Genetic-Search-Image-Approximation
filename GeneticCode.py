@@ -4,12 +4,15 @@ Created on Sep 12, 2015
 @author: mjchao
 '''
 from Mutator import Mutator
-from Parameters import IMG_WIDTH , IMG_HEIGHT , N
+from Parameters import IMG_WIDTH , IMG_HEIGHT , P, IMG_PIXEL_ARRAY
 from Polygon import Polygon
 
 import random
 from random import uniform
 import copy
+import Utils
+import pygame
+from Utils import convertToPixelArray, euclideanDistance
 
 '''
 Represents a Genetic Code to be used in the genetic search.
@@ -21,23 +24,24 @@ class GeneticCode( object ):
     MUTATION_PROBABILITY = 0.9
     
     '''
-    Creates a random GeneticCode with N n-gons.
+    Creates a random GeneticCode with P n-gons.
     '''
     @staticmethod
     def rand_genetic_code_with_n_gons( n ):
-        polygons = [ Polygon.rand_n_gon( n , IMG_WIDTH , IMG_HEIGHT ) for _ in range( 0 , N ) ]
+        polygons = [ Polygon.rand_n_gon( n , IMG_WIDTH , IMG_HEIGHT ) for _ in range( 0 , P ) ]
         return GeneticCode( polygons )
     
     '''
-    Creates a GeneticCode object. By default, it's a random list of N
+    Creates a GeneticCode object. By default, it's a random list of P
     triangles.
     '''
     def __init__( self , polygons = None ):
         if polygons is None:
-            self._polygons = [ Polygon.rand_triangle( IMG_WIDTH , IMG_HEIGHT ) for _ in range( 0 , N ) ]
+            self._polygons = [ Polygon.rand_triangle( IMG_WIDTH , IMG_HEIGHT ) for _ in range( 0 , P ) ]
         else:
             self._polygons = polygons
         self._fitness = -1
+        self._pixelArray = None
         pass
     
     '''
@@ -63,6 +67,9 @@ class GeneticCode( object ):
     def set( self , idx , newPolygon ):
         self._polygons[ idx ] = newPolygon
         
+    def draw_onto_screen( self , display ):
+        for polygon in self._polygons:
+            polygon.draw( display )
     '''
     Returns the fitness score of this genetic code.
     '''
@@ -70,8 +77,11 @@ class GeneticCode( object ):
         if ( self._fitness != -1 ):
             return self._fitness
         else:
-            #TODO
-            return 0
+            surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
+            for polygon in self._polygons:
+                polygon.draw_onto_surface( surface )
+            self._pixelArray = convertToPixelArray( surface )
+            return euclideanDistance( self._pixelArray , IMG_PIXEL_ARRAY )
          
     '''
     Returns the number of polygons of which this
@@ -96,10 +106,10 @@ class GeneticCode( object ):
     @staticmethod
     def crossN( *codes ):
         numParents = len( codes )
-        partitions = random.sample( range( 0 , N ) , numParents-1 )
+        partitions = random.sample( range( 0 , P ) , numParents-1 )
         partitions.sort()
         partitions = [0] + partitions
-        partitions.append( N )
+        partitions.append( P )
         
         childPolygons = []
         for i in range( 0 , numParents ):

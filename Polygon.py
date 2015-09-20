@@ -63,6 +63,12 @@ class Polygon( object ):
             self._color = color
         
     '''
+    Draws this polygon onto a surface
+    '''
+    def draw_onto_surface( self , surface ):
+        pygame.draw.polygon( surface , self._color , self._vertices )
+        
+    '''
     Draws this polygon onto the screen.
     '''
     def draw( self , display ):

@@ -7,12 +7,19 @@ Created on Sep 14, 2015
 from Parameters import N , K , T , E
 from GeneticCode import GeneticCode
 from random import randint
+import pygame
+from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
 
 class Search( object ):
     
     @staticmethod
     def fitness_comparator( code1 , code2 ):
-        return code2.get_fitness() - code1.get_fitness()
+        if ( code2.get_fitness() > code1.get_fitness() ):
+            return -1
+        elif ( code1.get_fitness() > code2.get_fitness() ):
+            return 1
+        else:
+            return 0
         
     '''
     Performs the genetic search algorithm.
@@ -37,5 +44,20 @@ class Search( object ):
             
             #repeat T times 
 
+        return codes
         
-Search.search()
+codes = Search.search()
+pygame.init()
+screen = pygame.display.set_mode( (32, 32) )
+screen.fill( (0, 0, 0) )
+codes[ 0 ].draw_onto_screen( screen )
+pygame.display.update()
+
+state = 0
+while state == 0:
+    pygame.display.update()
+    
+    for event in pygame.event.get():
+        if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+            state = 1
+            break
