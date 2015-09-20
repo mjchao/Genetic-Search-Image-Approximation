@@ -26,6 +26,13 @@ class Search( object ):
         else:
             return 0
         
+    @staticmethod
+    def save_code_as_image( code , gen ):
+        filename = OUTPUT_DIR + "/" + str( gen ) + ".bmp"
+        surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
+        code.draw_onto_surface( surface )
+        save_surface( surface , filename )
+        
     '''
     Performs the genetic search algorithm.
     '''
@@ -35,7 +42,7 @@ class Search( object ):
         #start with N random genetic codes
         codes = [ GeneticCode() for _ in range( 0 , N ) ]
         
-        for gen in range( 0 , T ):
+        for gen in range( 1 , T+1 ):
             
             #pick K pairs of states and cross them.
             for childNum in range( 0 , K ):
@@ -48,21 +55,19 @@ class Search( object ):
                 
                 #save the image every 1000 children
                 if ( (K * gen + childNum) % 1000 == 0 ):
-                    print "Processing generation " + str( gen )
-                    bestImg = max( codes , key = lambda p : p.get_fitness() )
-                    #print bestImg.get_fitness()
-                    filename = OUTPUT_DIR + "/" + str( gen ) + ".bmp"
-                    surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
-                    bestImg.draw_onto_surface( surface )
-                    save_surface( surface , filename )
+                    bestCode = max( codes , key = lambda p : p.get_fitness() )
+                    print "Processing generation " + str( gen ) + "; best fitness = " + str( bestCode.get_fitness() )
+                    Search.save_code_as_image( bestCode , gen )
             
             #keep N best states
             codes.sort( Search.fitness_comparator )
             codes = codes[ 0:N ]
-            #print str( codes[ 0 ].get_fitness() ) + " " + str( codes[ N-1 ].get_fitness() )
             
             #repeat T times 
 
+        #save the last image
+        #print "Processing generation " + str( T-1 )
+        #Search.save_code_as_image( codes[ 0 ] , T-1 )
         return codes
         
 codes = Search.search()

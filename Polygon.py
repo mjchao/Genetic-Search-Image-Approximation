@@ -8,6 +8,8 @@ import pygame
 from Parameters import IMG_WIDTH , IMG_HEIGHT
 from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
 from random import randint
+import Utils
+from Utils import renderPolygon
 
 '''
 Represents a polygon with some vertices and filled with a given color.
@@ -66,15 +68,14 @@ class Polygon( object ):
     Draws this polygon onto a surface
     '''
     def draw_onto_surface( self , surface ):
-        pygame.draw.polygon( surface , self._color , self._vertices )
+        pygame.draw.polygon( surface , self._color , self._vertices , 0 )
         
     '''
     Draws this polygon onto the screen.
     '''
     def draw( self , display ):
         surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
-        surface.set_alpha( self._color[ 3 ] )
-        pygame.draw.polygon( surface , self._color[0:3] , self._vertices )
+        pygame.draw.polygon( surface , self._color , self._vertices , 0 )
         display.blit( surface , (0, 0) )
      
     '''

@@ -10,7 +10,6 @@ from Polygon import Polygon
 import random
 from random import uniform
 import copy
-import Utils
 import pygame
 from Utils import convertToPixelArray, euclideanDistance
 
