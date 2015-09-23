@@ -12,8 +12,8 @@ IMG_HEIGHT = 32
 
 P = 100
 N = 1
-K = 2
-T = 10000
+K = 1
+T = 25000
 E = 25000
 IMG = pygame.image.load( "mona_lisa.bmp" )
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )

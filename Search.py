@@ -11,14 +11,19 @@ import pygame
 from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
 from Utils import save_surface
 
+pygame.font.init()
+
 class Search( object ):
     
     '''
     We use this window for taking screenshots and saving the image
     to a file. The normal surface object seems incapable of dealing
     with alpha values, so we have to actually blit to a window.
+    We also have to add a bit of extra space at the bottom
+    to draw the generation number.
     '''
-    window = pygame.display.set_mode( (IMG_WIDTH , IMG_HEIGHT) ) 
+    window = pygame.display.set_mode( (IMG_WIDTH , IMG_HEIGHT+10) ) 
+    generationFont = pygame.font.SysFont( "Times New Roman" , 8 )
     
     '''
     This puts the best codes first (higher fitness means
@@ -39,6 +44,12 @@ class Search( object ):
         #surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
         Search.window.fill( (0,0,0) )
         code.draw_onto_screen( Search.window )
+        
+        #draw the generation number
+        label = Search.generationFont.render( "Gen: " + str( gen ) , 1 , (255,255,255) )
+        Search.window.blit( label , (10 , IMG_HEIGHT+1 ) )
+        
+        #update screen before saving it
         pygame.display.update()
         save_surface( Search.window , filename )
         

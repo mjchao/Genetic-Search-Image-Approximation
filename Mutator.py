@@ -37,7 +37,7 @@ class Mutator( object ):
     '''
     @staticmethod
     def __alter_color( colorValue ):
-        change = randint( -9 , 9 )
+        change = randint( -10 , 10 )
         changedValue = colorValue + change
         if ( changedValue < 0 ):
             return 0
