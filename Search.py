@@ -6,12 +6,19 @@ Created on Sep 14, 2015
 
 from Parameters import N , K , T , IMG_WIDTH , IMG_HEIGHT , OUTPUT_DIR
 from GeneticCode import GeneticCode
-from random import randint
+from random import randint , uniform
 import pygame
 from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
 from Utils import save_surface
 
 class Search( object ):
+    
+    '''
+    We use this window for taking screenshots and saving the image
+    to a file. The normal surface object seems incapable of dealing
+    with alpha values, so we have to actually blit to a window.
+    '''
+    window = pygame.display.set_mode( (IMG_WIDTH , IMG_HEIGHT) ) 
     
     '''
     This puts the best codes first (higher fitness means
@@ -29,9 +36,11 @@ class Search( object ):
     @staticmethod
     def save_code_as_image( code , gen ):
         filename = OUTPUT_DIR + "/" + str( gen ) + ".bmp"
-        surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
-        code.draw_onto_surface( surface )
-        save_surface( surface , filename )
+        #surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
+        Search.window.fill( (0,0,0) )
+        code.draw_onto_screen( Search.window )
+        pygame.display.update()
+        save_surface( Search.window , filename )
         
     '''
     Performs the genetic search algorithm.
@@ -44,11 +53,29 @@ class Search( object ):
         
         for gen in range( 1 , T+1 ):
             
+            sumFitness = sum( [ x.get_fitness() for x in codes ] )
+            
             #pick K pairs of states and cross them.
             for childNum in range( 0 , K ):
+                
+                #select first parent proportional to fitness    
+                key1 = uniform( 0 , sumFitness )
+                currSum = 0
+                for code in codes:
+                    currSum += code.get_fitness()
+                    if ( currSum > key1 ):
+                        parent1 = code
+                        break
+                
+                #select second parent proportional to fitness    
+                key2 = uniform( 0 , sumFitness )
+                currSum = 0
+                for code in codes:
+                    currSum += code.get_fitness()
+                    if ( currSum > key2 ):
+                        parent2 = code
+                        break
                     
-                parent1 = codes[ randint( 0 , N-1 ) ]
-                parent2 = codes[ randint( 0 , N-1 ) ]
                 child = GeneticCode.cross( parent1 , parent2 )
                 child.mutate()
                 codes.append( child )
@@ -75,6 +102,7 @@ pygame.init()
 screen = pygame.display.set_mode( (32, 32) )
 screen.fill( (0, 0, 0) )
 codes[ 0 ].draw_onto_screen( screen )
+save_surface( screen , OUTPUT_DIR + "/" + "final.bmp" )
 pygame.display.update()
 
 state = 0

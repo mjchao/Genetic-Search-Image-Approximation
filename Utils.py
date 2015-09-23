@@ -20,6 +20,10 @@ def convertToPixelArray(image_surface):
 def euclideanDistance(PixelArray1, PixelArray2):
     return numpy.linalg.norm(PixelArray1 - PixelArray2)
 
+#Returns the norm |s| of a pixel array s
+def norm( pixelArray ):
+    return numpy.linalg.norm( pixelArray )
+
 
 ## Returns an image surface read from a file
 def loadImage(filename):

@@ -4,14 +4,15 @@ Created on Sep 12, 2015
 @author: mjchao
 '''
 from Mutator import Mutator
-from Parameters import IMG_WIDTH , IMG_HEIGHT , P, IMG_PIXEL_ARRAY
+from Parameters import IMG_WIDTH , IMG_HEIGHT , P, IMG_PIXEL_ARRAY , IMG_PIXEL_ARRAY_NORM
 from Polygon import Polygon
 
 import random
 from random import uniform
+from math import log10
 import copy
 import pygame
-from Utils import convertToPixelArray, euclideanDistance
+from Utils import convertToPixelArray, euclideanDistance, norm
 
 '''
 Represents a Genetic Code to be used in the genetic search.
@@ -89,7 +90,8 @@ class GeneticCode( object ):
             surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
             self.draw_onto_surface( surface )
             self._pixelArray = convertToPixelArray( surface )
-            self._fitness = -1*euclideanDistance( self._pixelArray , IMG_PIXEL_ARRAY )
+            euclideanDist = euclideanDistance( self._pixelArray , IMG_PIXEL_ARRAY )
+            self._fitness = -log10( euclideanDist/(norm( self._pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
             return self._fitness
          
     '''
