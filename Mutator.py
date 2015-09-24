@@ -6,7 +6,7 @@ Created on Sep 12, 2015
 
 from Parameters import IMG_WIDTH , IMG_HEIGHT
 from Polygon import Polygon
-from random import randint
+from random import randint , gauss
 import copy
 
 class Mutator( object ):
@@ -37,7 +37,12 @@ class Mutator( object ):
     '''
     @staticmethod
     def __alter_color( colorValue ):
-        change = randint( -10 , 10 )
+        #change = randint( -25 , 25 )
+        
+        #use a normal distribution for color
+        #so that drastic color changes can still happen.
+        #in many cases, we need a drastic color change.
+        change = int( gauss( 0 , 25 ) )
         changedValue = colorValue + change
         if ( changedValue < 0 ):
             return 0
@@ -68,11 +73,11 @@ class Mutator( object ):
         for polygon in code._polygons:
             for i in range( 0 , len( polygon._vertices ) ):
                 currX = polygon._vertices[ i ][ 0 ]
-                dx = randint( -5 , 5 )
+                dx = int( gauss( 0 , IMG_WIDTH/10 ) )
                 newX = currX + dx
                 
                 currY = polygon._vertices[ i ][ 1 ]
-                dy = randint( -5 , 5 )
+                dy = int( gauss( 0 , IMG_HEIGHT/10 ) )
                 newY = currY + dy
                 
                 polygon._vertices[ i ] = (newX , newY)
@@ -101,6 +106,33 @@ class Mutator( object ):
             del polygon._vertices[ vertexIdx ]
        
     '''
+    Replaces a polygon with a random new polygon of the same number of
+    sides. This should help escape local optima
+    '''
+    @staticmethod
+    def __mutate_escape_local_optima__( code ):
+        Mutator.__mutate1__( code )
+        
+    '''
+    Changes the coloring of the images by swapping two polygon
+    positions, or altering the polygon's color
+    '''
+    @staticmethod
+    def __mutate_alter_color__( code ):
+        mutationsList = [ Mutator.__mutate2__ , Mutator.__mutate3__ ]
+        mutationIdx = randint( 0 , len(mutationsList)-1 )
+        mutationsList[ mutationIdx ]( code )
+    '''
+    Selects a random mutation to apply to a polygon that 
+    will alter its shape
+    '''
+    @staticmethod   
+    def __mutate_alter_shape__( code ):
+        mutationsList = [ Mutator.__mutate4__ , Mutator.__mutate4__ , Mutator.__mutate4__ ,\
+                          Mutator.__mutate5__ , Mutator.__mutate5__ , Mutator.__mutate6__ ]
+        mutationIdx = randint( 0 , len( mutationsList)-1 )
+        mutationsList[ mutationIdx ]( code )
+    '''
     Selects a random mutation to apply to a polygon.
     This mutation happens for sure. It is the responsibility
     of the caller to ensure that mutations occur
@@ -108,8 +140,9 @@ class Mutator( object ):
     '''
     @staticmethod
     def mutate( code ):
-        mutationsList = [ Mutator.__mutate1__ , Mutator.__mutate2__ , Mutator.__mutate3__ ,\
-                          Mutator.__mutate4__ , Mutator.__mutate5__ , Mutator.__mutate6__ ]
+        mutationsList = [ Mutator.__mutate_escape_local_optima__ , Mutator.__mutate_escape_local_optima__ , \
+                         Mutator.__mutate_alter_color__ , Mutator.__mutate_alter_color__ , Mutator.__mutate_alter_color__ , \
+                         Mutator.__mutate_alter_shape__ , Mutator.__mutate_alter_shape__ , Mutator.__mutate_alter_shape__ ]
         mutationIdx = randint( 0 , len( mutationsList )-1 )
         mutationsList[ mutationIdx ]( code )
 '''

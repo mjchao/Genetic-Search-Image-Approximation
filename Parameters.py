@@ -7,16 +7,20 @@ import pygame
 from Utils import convertToPixelArray, norm
 
 #list of global parameter constants
-IMG_WIDTH = 32
-IMG_HEIGHT = 32
+
 
 P = 100
 N = 1
 K = 1
-T = 25000
-E = 25000
-IMG = pygame.image.load( "mona_lisa.bmp" )
+T = 500000
+E = 500000
+
+#---Change when image changes---#
+IMG = pygame.image.load( "darwin.bmp" )
+OUTPUT_DIR = "darwin"
+IMG_WIDTH = 216
+IMG_HEIGHT = 174
+#-------------------------#
+
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
 IMG_PIXEL_ARRAY_NORM = norm( IMG_PIXEL_ARRAY )
-
-OUTPUT_DIR = "mona_lisa"

@@ -80,6 +80,13 @@ class GeneticCode( object ):
     def draw_onto_surface( self , surf ):
         for polygon in self._polygons:
             polygon.draw_onto_surface( surf )
+            
+    '''
+    Must use a static surface because pygame runs out of memory if we make
+    multiply surfaces
+    '''
+    surface = pygame.surface.Surface( (IMG_WIDTH , IMG_HEIGHT) , flags = pygame.SRCALPHA )
+    
     '''
     Returns the fitness score of this genetic code.
     '''
@@ -87,11 +94,11 @@ class GeneticCode( object ):
         if ( self._fitness != -1 ):
             return self._fitness
         else:
-            surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
-            self.draw_onto_surface( surface )
-            self._pixelArray = convertToPixelArray( surface )
-            euclideanDist = euclideanDistance( self._pixelArray , IMG_PIXEL_ARRAY )
-            self._fitness = -log10( euclideanDist/(norm( self._pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
+            GeneticCode.surface.fill( (0,0,0) )
+            self.draw_onto_surface( GeneticCode.surface )
+            pixelArray = convertToPixelArray( GeneticCode.surface )
+            euclideanDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
+            self._fitness = -log10( euclideanDist/(norm( pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
             return self._fitness
          
     '''

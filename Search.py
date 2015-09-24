@@ -10,6 +10,7 @@ from random import randint , uniform
 import pygame
 from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
 from Utils import save_surface
+from time import sleep
 
 pygame.font.init()
 
@@ -96,6 +97,10 @@ class Search( object ):
                     bestCode = max( codes , key = lambda p : p.get_fitness() )
                     print "Processing generation " + str( gen ) + "; best fitness = " + str( bestCode.get_fitness() )
                     Search.save_code_as_image( bestCode , gen )
+                    
+                    #I'd rather not have my computer overheat, so we'll
+                    #sleep for 10 seconds every 1000 generations
+                    sleep( 5 )
             
             #keep N best states
             codes.sort( Search.fitness_comparator )
@@ -124,3 +129,5 @@ while state == 0:
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             state = 1
             break
+        
+    state = 1
