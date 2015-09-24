@@ -41,7 +41,7 @@ class Search( object ):
         
     @staticmethod
     def save_code_as_image( code , gen ):
-        filename = OUTPUT_DIR + "/" + str( gen ) + ".bmp"
+        filename = OUTPUT_DIR + "/" + str( gen ) + ".png"
         #surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
         Search.window.fill( (0,0,0) )
         code.draw_onto_screen( Search.window )
@@ -100,7 +100,7 @@ class Search( object ):
                     
                     #I'd rather not have my computer overheat, so we'll
                     #sleep for 10 seconds every 1000 generations
-                    sleep( 5 )
+                    sleep( 10 )
             
             #keep N best states
             codes.sort( Search.fitness_comparator )
