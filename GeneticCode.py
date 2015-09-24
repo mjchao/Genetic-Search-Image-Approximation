@@ -98,7 +98,7 @@ class GeneticCode( object ):
             self.draw_onto_surface( GeneticCode.surface )
             pixelArray = convertToPixelArray( GeneticCode.surface )
             euclideanDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
-            self._fitness = -log10( euclideanDist/(norm( pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
+            self._fitness = -(log10( euclideanDist ) - log10(norm( pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
             return self._fitness
          
     '''

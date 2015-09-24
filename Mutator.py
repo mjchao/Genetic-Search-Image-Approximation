@@ -104,34 +104,26 @@ class Mutator( object ):
         else:
             vertexIdx = randint( 0 , len( polygon._vertices )-1 )
             del polygon._vertices[ vertexIdx ]
-       
-    '''
-    Replaces a polygon with a random new polygon of the same number of
-    sides. This should help escape local optima
-    '''
-    @staticmethod
-    def __mutate_escape_local_optima__( code ):
-        Mutator.__mutate1__( code )
-        
-    '''
-    Changes the coloring of the images by swapping two polygon
-    positions, or altering the polygon's color
-    '''
-    @staticmethod
-    def __mutate_alter_color__( code ):
-        mutationsList = [ Mutator.__mutate2__ , Mutator.__mutate3__ ]
-        mutationIdx = randint( 0 , len(mutationsList)-1 )
-        mutationsList[ mutationIdx ]( code )
+            
     '''
     Selects a random mutation to apply to a polygon that 
     will alter its shape
     '''
     @staticmethod   
     def __mutate_alter_shape__( code ):
-        mutationsList = [ Mutator.__mutate4__ , Mutator.__mutate4__ , Mutator.__mutate4__ ,\
-                          Mutator.__mutate5__ , Mutator.__mutate5__ , Mutator.__mutate6__ ]
+        mutationsList = [ Mutator.__mutate4__ , Mutator.__mutate5__ , Mutator.__mutate6__ ]
         mutationIdx = randint( 0 , len( mutationsList)-1 )
         mutationsList[ mutationIdx ]( code )
+        
+    '''
+    
+    '''
+    @staticmethod
+    def __mutate_modify_polygon__( code ):
+        mutationsList = [ Mutator.__mutate3__ , Mutator.__mutate_alter_shape__ ]
+        mutationIdx = randint( 0 , len(mutationsList)-1 )
+        mutationsList[ mutationIdx ]( code )
+        
     '''
     Selects a random mutation to apply to a polygon.
     This mutation happens for sure. It is the responsibility
@@ -140,9 +132,9 @@ class Mutator( object ):
     '''
     @staticmethod
     def mutate( code ):
-        mutationsList = [ Mutator.__mutate_escape_local_optima__ , Mutator.__mutate_escape_local_optima__ , \
-                         Mutator.__mutate_alter_color__ , Mutator.__mutate_alter_color__ , Mutator.__mutate_alter_color__ , \
-                         Mutator.__mutate_alter_shape__ , Mutator.__mutate_alter_shape__ , Mutator.__mutate_alter_shape__ ]
+        mutationsList = [ Mutator.__mutate1__ , Mutator.__mutate2__ , \
+                         Mutator.__mutate_modify_polygon__ , Mutator.__mutate_modify_polygon__ , \
+                         Mutator.__mutate_modify_polygon__ ]
         mutationIdx = randint( 0 , len( mutationsList )-1 )
         mutationsList[ mutationIdx ]( code )
 '''
