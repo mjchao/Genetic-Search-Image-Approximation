@@ -7,7 +7,7 @@ Created on Sep 12, 2015
 import pygame
 from Parameters import IMG_WIDTH , IMG_HEIGHT
 from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
-from random import randint
+from random import randint , gauss
 import Utils
 from Utils import renderPolygon
 
@@ -26,6 +26,16 @@ class Polygon( object ):
     @staticmethod
     def rand_xy( maxX , maxY ):
         return ( randint( 0 , maxX ) , randint( 0 , maxY ) )
+    
+    '''
+    Returns a coordinate (x, y) near the given point. The (x, y)
+    are generated with a gaussian distribution with mean
+    (x, y) and standard deviation of the width and height of the
+    image divided by 10, respectively. 
+    '''
+    @staticmethod
+    def gauss_xy_about_point( point ):
+        return ( int(gauss( point[ 0 ] , IMG_WIDTH/10 )) , int(gauss( point[ 1 ] , IMG_HEIGHT/10)) )
     
     '''
     Returns a random (r, g, b, a) value
@@ -47,7 +57,8 @@ class Polygon( object ):
     '''
     @staticmethod
     def rand_n_gon( n , maxX , maxY ):
-        return Polygon( [Polygon.rand_xy( maxX , maxY) for _ in range( 0 , n )]  , Polygon.rand_rgba() )
+        center = Polygon.rand_xy( maxX , maxY )
+        return Polygon( [Polygon.gauss_xy_about_point( center ) for _ in range( 0 , n )]  , Polygon.rand_rgba() )
         
     
     '''
