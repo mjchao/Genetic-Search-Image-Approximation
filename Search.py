@@ -98,10 +98,6 @@ class Search( object ):
                     print "Processing generation " + str( gen ) + "; best fitness = " + str( bestCode.get_fitness() )
                     Search.save_code_as_image( bestCode , gen )
                     
-                    #I'd rather not have my computer overheat, so we'll
-                    #sleep for 10 seconds every 1000 generations
-                    sleep( 10 )
-            
             #keep N best states
             codes.sort( Search.fitness_comparator )
             codes = codes[ 0:N ]
