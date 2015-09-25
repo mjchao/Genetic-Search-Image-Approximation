@@ -48,7 +48,7 @@ class Search( object ):
         
         #draw the generation number
         label = Search.generationFont.render( "Gen: " + str( gen ) , 1 , (255,255,255) )
-        Search.window.blit( label , (10 , IMG_HEIGHT+1 ) )
+        Search.window.blit( label , (0 , IMG_HEIGHT+1 ) )
         
         #update screen before saving it
         pygame.display.update()
