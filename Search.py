@@ -47,7 +47,7 @@ class Search( object ):
         code.draw_onto_screen( Search.window )
         
         #draw the generation number
-        label = Search.generationFont.render( "Gen: " + str( gen ) , 1 , (255,255,255) )
+        label = Search.generationFont.render( str( gen ) , 1 , (255,255,255) )
         Search.window.blit( label , (0 , IMG_HEIGHT+1 ) )
         
         #update screen before saving it
