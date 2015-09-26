@@ -18,7 +18,7 @@ class Mutator( object ):
     @staticmethod
     def __mutate1__( code ):
         idxToChange = randint( 0 , len( code._polygons )-1 )
-        code._polygons[ idxToChange ] = Polygon.rand_n_gon( code._polygons[ idxToChange ].num_vertices() , IMG_WIDTH , IMG_HEIGHT )
+        code._polygons[ idxToChange ] = Polygon.rand_n_gon( 3 , IMG_WIDTH , IMG_HEIGHT )
     
     '''
     Swaps the positions of two polygons in the ordered list of the genetic code.
