@@ -16,10 +16,10 @@ T = 500000
 E = 500000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "turing.jpg" )
-OUTPUT_DIR = "turing"
-IMG_WIDTH = 128
-IMG_HEIGHT = 128
+IMG = pygame.image.load( "michigan.bmp" )
+OUTPUT_DIR = "michigan"
+IMG_WIDTH = 328
+IMG_HEIGHT = 189
 #-------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
