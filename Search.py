@@ -63,7 +63,7 @@ class Search( object ):
         #start with N random genetic codes
         codes = [ GeneticCode() for _ in range( 0 , N ) ]
         
-        for gen in range( 1 , T+1 ):
+        for gen in range( 0 , T+1 ):
             
             sumFitness = sum( [ x.get_fitness() for x in codes ] )
             
