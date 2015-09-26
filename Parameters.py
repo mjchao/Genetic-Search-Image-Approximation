@@ -16,7 +16,7 @@ T = 500000
 E = 500000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "mona_lisa.jpg" )
+IMG = pygame.image.load( "mona_lisa.bmp" )
 OUTPUT_DIR = "mona_lisa"
 IMG_WIDTH = 32
 IMG_HEIGHT = 32
