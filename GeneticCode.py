@@ -100,8 +100,6 @@ class GeneticCode( object ):
             pixelArray = convertToPixelArray( GeneticCode.surface )
             euclideanDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
             self._fitness = -(log10( euclideanDist ) - log10(norm( pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
-            save_surface( GeneticCode.surface , "tmp.png" )
-            print self._fitness
             return self._fitness
          
     '''
