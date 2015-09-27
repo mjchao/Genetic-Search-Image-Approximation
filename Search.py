@@ -44,14 +44,6 @@ class Search( object ):
     @staticmethod
     def save_code_as_image( code , gen ):
         filename = OUTPUT_DIR + "/" + str( gen ) + ".png"
-        #surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
-        Search.window.fill( (0,0,0) )
-        code.draw_onto_screen( Search.window )
-        GeneticCode.surface.fill( (0,0,0) )
-        code.draw_onto_surface( GeneticCode.surface )
-        pixelArray = convertToPixelArray( GeneticCode.surface )
-        eucDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
-        print eucDist 
         
         #draw the generation number
         label = Search.generationFont.render( str( gen ) , 1 , (255,255,255) )
