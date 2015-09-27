@@ -16,8 +16,8 @@ T = 500000
 E = 500000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "haystack.jpg" )
-OUTPUT_DIR = "haystack"
+IMG = pygame.image.load( "mona_lisa.bmp" )
+OUTPUT_DIR = "tmp"
 IMG_WIDTH = 96
 IMG_HEIGHT = 96
 

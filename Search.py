@@ -4,7 +4,7 @@ Created on Sep 14, 2015
 @author: mjchao
 '''
 
-from Parameters import N , K , T , IMG_WIDTH , IMG_HEIGHT , OUTPUT_DIR
+from Parameters import N , K , T , IMG_WIDTH , IMG_HEIGHT , OUTPUT_DIR , IMG_PIXEL_ARRAY
 from GeneticCode import GeneticCode
 from random import randint , uniform
 import pygame
@@ -47,6 +47,11 @@ class Search( object ):
         #surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
         Search.window.fill( (0,0,0) )
         code.draw_onto_screen( Search.window )
+        GeneticCode.surface.fill( (0,0,0) )
+        code.draw_onto_surface( GeneticCode.surface )
+        pixelArray = convertToPixelArray( GeneticCode.surface )
+        eucDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
+        print eucDist 
         
         #draw the generation number
         label = Search.generationFont.render( str( gen ) , 1 , (255,255,255) )
@@ -109,8 +114,8 @@ class Search( object ):
         #save the last image
         #print "Processing generation " + str( T-1 )
         #Search.save_code_as_image( codes[ 0 ] , T-1 )
-        return codes 
-
+        return codes
+    
 codes = Search.search()
 pygame.init()
 screen = pygame.display.set_mode( (32, 32) )

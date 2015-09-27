@@ -12,4 +12,4 @@ def gen( directory ):
     
     print cmd
     
-gen( "turing2" )
+gen( "haystack" )

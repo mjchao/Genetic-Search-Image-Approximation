@@ -31,5 +31,5 @@ class Plot( object ):
         plt.title( "Fitness Over Generations With N=1, K=1" )
         plt.show()
          
-Plot.plot_data( "turing.out" )   
+Plot.plot_data( "haystack.out" )   
         
