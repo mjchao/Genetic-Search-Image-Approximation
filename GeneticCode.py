@@ -21,7 +21,7 @@ objects.
 '''
 class GeneticCode( object ):
     
-    MUTATION_PROBABILITY = 0.9
+    MUTATION_PROBABILITY = 1.0
     
     '''
     Creates a random GeneticCode with P n-gons.

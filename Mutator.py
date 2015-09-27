@@ -41,7 +41,7 @@ class Mutator( object ):
         #use a normal distribution for color
         #so that drastic color changes can still happen.
         #in many cases, we need a drastic color change.
-        change = int( gauss( 0 , 45 ) )
+        change = int( gauss( 0 , 60 ) )
         changedValue = colorValue + change
         if ( changedValue < 0 ):
             return 0
