@@ -9,8 +9,10 @@ from GeneticCode import GeneticCode
 from random import randint , uniform
 import pygame
 from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
-from Utils import save_surface
+from Utils import save_surface , loadImage, euclideanDistance,\
+    convertToPixelArray
 from time import sleep
+import sys
 
 pygame.font.init()
 
@@ -107,8 +109,8 @@ class Search( object ):
         #save the last image
         #print "Processing generation " + str( T-1 )
         #Search.save_code_as_image( codes[ 0 ] , T-1 )
-        return codes
-        
+        return codes 
+
 codes = Search.search()
 pygame.init()
 screen = pygame.display.set_mode( (32, 32) )
