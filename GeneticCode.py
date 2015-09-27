@@ -99,7 +99,7 @@ class GeneticCode( object ):
             GeneticCode.surface.fill( (0,0,0) )
             self.draw_onto_surface( GeneticCode.window )
             save_surface( GeneticCode.window , "tmp.png" )
-            pixelArray = convertToPixelArray( loadImage( "tmp.png" ) )
+            pixelArray = loadImage( "tmp.png" )
             euclideanDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
             self._fitness = -(log10( euclideanDist ) - log10(norm( pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
             return self._fitness
