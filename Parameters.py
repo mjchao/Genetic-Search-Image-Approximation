@@ -15,10 +15,12 @@ K = 1
 T = 500000
 E = 500000
 
-IMG = pygame.image.load( "haystack.png" )
-OUTPUT_DIR = "haystack"
-IMG_WIDTH = 128
-IMG_HEIGHT = 128
+#---Change when image changes---#
+IMG = pygame.image.load( "mona_lisa.jpg" )
+OUTPUT_DIR = "mona_lisa2"
+IMG_WIDTH = 32
+IMG_HEIGHT = 32
+#-------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
 IMG_PIXEL_ARRAY_NORM = norm( IMG_PIXEL_ARRAY )
