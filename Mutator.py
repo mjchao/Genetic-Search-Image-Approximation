@@ -12,8 +12,7 @@ import copy
 class Mutator( object ):
     
     '''
-    Replaces a polygon with a random new polygon of the same number
-    of sides in the genetic code.
+    Replaces a polygon with a random new triangle in the genetic code.
     '''
     @staticmethod
     def __mutate1__( code ):
@@ -42,7 +41,7 @@ class Mutator( object ):
         #use a normal distribution for color
         #so that drastic color changes can still happen.
         #in many cases, we need a drastic color change.
-        change = int( gauss( 0 , 25 ) )
+        change = int( gauss( 0 , 45 ) )
         changedValue = colorValue + change
         if ( changedValue < 0 ):
             return 0
@@ -73,11 +72,11 @@ class Mutator( object ):
         for polygon in code._polygons:
             for i in range( 0 , len( polygon._vertices ) ):
                 currX = polygon._vertices[ i ][ 0 ]
-                dx = int( gauss( 0 , IMG_WIDTH/10 ) )
+                dx = int( gauss( 0 , IMG_WIDTH/5 ) )
                 newX = currX + dx
                 
                 currY = polygon._vertices[ i ][ 1 ]
-                dy = int( gauss( 0 , IMG_HEIGHT/10 ) )
+                dy = int( gauss( 0 , IMG_HEIGHT/5 ) )
                 newY = currY + dy
                 
                 polygon._vertices[ i ] = (newX , newY)
@@ -111,7 +110,7 @@ class Mutator( object ):
     '''
     @staticmethod   
     def __mutate_alter_shape__( code ):
-        mutationsList = [ Mutator.__mutate4__ , Mutator.__mutate5__ , Mutator.__mutate6__ ]
+        mutationsList = [ Mutator.__mutate4__ , Mutator.__mutate6__ ]
         mutationIdx = randint( 0 , len( mutationsList)-1 )
         mutationsList[ mutationIdx ]( code )
         
