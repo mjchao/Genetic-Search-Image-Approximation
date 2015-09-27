@@ -16,10 +16,10 @@ T = 500000
 E = 500000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "mona_lisa.bmp" )
+IMG = pygame.image.load( "darwin.bmp" )
 OUTPUT_DIR = "tmp"
-IMG_WIDTH = 32
-IMG_HEIGHT = 32
+IMG_WIDTH = 216
+IMG_HEIGHT = 174
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
 IMG_PIXEL_ARRAY_NORM = norm( IMG_PIXEL_ARRAY )

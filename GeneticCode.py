@@ -12,7 +12,8 @@ from random import uniform
 from math import log10
 import copy
 import pygame
-from Utils import convertToPixelArray, euclideanDistance, norm
+from Utils import convertToPixelArray, euclideanDistance, norm , save_surface
+import sys
 
 '''
 Represents a Genetic Code to be used in the genetic search.
@@ -94,11 +95,13 @@ class GeneticCode( object ):
         if ( self._fitness != -1 ):
             return self._fitness
         else:
-            GeneticCode.surface.fill( (0,0,0) )
+            GeneticCode.surface.fill( (0,0,0) ) 
             self.draw_onto_surface( GeneticCode.surface )
             pixelArray = convertToPixelArray( GeneticCode.surface )
             euclideanDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
             self._fitness = -(log10( euclideanDist ) - log10(norm( pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
+            save_surface( GeneticCode.surface , "tmp.png" )
+            print self._fitness
             return self._fitness
          
     '''

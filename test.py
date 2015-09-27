@@ -3,7 +3,7 @@ from Utils import *
 from math import log10
 
 orig = loadImage( "darwin.bmp" )
-approx = loadImage( "darwin/darwin_test.png" )
+approx = loadImage( "tmp.png" )
 
 origArray = convertToPixelArray( orig )
 approxArray = convertToPixelArray( approx )
