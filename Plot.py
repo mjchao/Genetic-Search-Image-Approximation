@@ -26,7 +26,10 @@ class Plot( object ):
         x = np.array( x )
         y = np.array( y )
         plt.plot( x , y )
+        plt.xlabel( "Generations" )
+        plt.ylabel( "Fitness" )
+        plt.title( "Fitness Over Generations With N=1, K=1" )
         plt.show()
          
-Plot.plot_data( "mona_lisa2.out" )   
+Plot.plot_data( "turing.out" )   
         

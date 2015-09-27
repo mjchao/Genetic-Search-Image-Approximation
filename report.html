@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EECS 492 A1 Results</title>
+</head>
+<body>
+<p>
+EECS 492 A1 Results<br>
+Steve Chapel<br>
+September 18, 2011<br>
+</p>
+<h2>A1 Results</h2>
+<p>
+The purpose of this project is to recreate
+<a href="http://rogeralsing.com/2008/12/07/genetic-programming-evolution-of-mona-lisa/">Roger
+Alsing's work on genetic programming to create art</a>.
+The population consists of approximations to a given image.
+Each image uses P polygons, where P=100 for the results on this page.
+N is the population size and K is the number of new children created per generation.
+T is the number of generations displayed in each animation.
+The fitness of the image is a measure of how closely it matches the original image.
+The learning curve shows how the fitness of the best approximation improves over time.
+The 3D graphs depict how the fitness after 25000 generations varies with N and K.
+</p>
+<table border=1>
+<tr>
+<th>Original image</th>
+<th>Approximation</th>
+<th>Learning curve</th>
+</tr>
+
+<tr>
+<td>216&times;174 pixels<br><img src="darwin.bmp"></td>
+<td>P=100, N=1, K=1<br><img src="darwin/darwin_anim.png"></td>
+<td><img src="darwin_fitness.png"></td>
+<td><img width=400 height=400 src="im_darwin3d.svg"><br>N=4, K=2 gave the best result<td>
+</tr>
+
+<tr>
+<td>128&times;128 pixels<br><img src="haystack.png"></td>
+<td>P=100, N=1, K=1<br><img src="haystack/haystack_anim.png"></td>
+<td><img src="haystack_fitness.png"></td>
+<td><img width=400 height=400 src="images3d.svg"><br>N=4, K=1 gave the best result<td>
+</tr>
+
+<tr>
+<td>328&times;189 pixels<br><img src="michigan.bmp"></td>
+<td>P=100, N=1, K=1<br><img src="michigan/michigan_anim.png"></td>
+<td><img src="michigan_fitness.png"></td>
+<td><img width=400 height=400 src="scream3d.svg"><br>N=2, K=1 gave the best result</td>
+</tr>
+
+<tr>
+<td>32&times;32 pixels<br><img src="mona_lisa.bmp"></td>
+<td>P=100, N=1, K=1<br><img src="mona_lisa/mona_lisa_anim.png"></td>
+<td><img src="mona_lisa_fitness.png"></td>
+<td><img width=400 height=400 src="mona-lisa3d.svg"><br>N=1, K=2 gave the best result</td>
+</tr>
+
+<tr>
+<td>128&times;128 pixels<br><img src="turing.jpg"></td>
+<td>P=100, N=1, K=1<br><img src="turing/turing_anim.png"></td>
+<td><img src="turing_fitness.png"></td>
+<td><img width=400 height=400 src="darwin3d.svg"><br>N=2, K=1 gave the best result</td>
+</tr>
+
+</table>
+<img width=600 height=600 src="overall3d.svg"><br>
+N=1, K=2 gave the best result overall after 25000 generations<br>
+<hr>
+<p>
+Mutations used:
+<ul>
+<li>With 1/5 probability, replace a polygon with a random triangle.</li>
+<li>With 1/5 probability, swap the order of two polygons which are in adjacent depth layers.</li>
+<li>With 3/5 probability, mutate an existing polygon:
+<ul>
+<li>With 1/2 probability, alter the color slightly.</li>
+<li>With 1/2 probability, alter the shape of the polygon:
+<ul>
+<li>With 1/3 probability, remove a vertex.</li>
+<li>With 1/3 probability, add a vertex close to an edge.</li>
+<li>With 1/3 probability, move a vertex slightly.</li>
+</ul></li>
+</ul></li>
+</ul>
+Coordinates of vertices were moved using a Gaussian distribution of mean 0 and standard deviation 5 pixels.
+Components of colors (0.0 to 1.0 scale) were altered using a Gaussian distribution of mean 0 and standard deviation 0.05.
+</p>
+<p>
+Random triangles were created by picking a point on the image with uniform distribution,
+then adding a Gaussian distribution of mean 0 and
+standard deviation 20% of the image width to the point to obtain the vertices.
+Random colors were picked using uniform distribution over the RGB color space.
+</p>
+<p>
+Parents were selected from an array of individuals sorted in decreasing order of fitness
+using the index <code>Rand.nextInt(Rand.nextInt(n) + 1)</code> where Rand.nextInt(m) returns a
+random integer uniformly distributed between 0 and m-1 inclusive. This made the more fit individuals
+more likely to be chosen for crossover.
+</p>
+</body>
+</html>
