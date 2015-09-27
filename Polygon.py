@@ -35,7 +35,7 @@ class Polygon( object ):
     '''
     @staticmethod
     def gauss_xy_about_point( point ):
-        return ( int(gauss( point[ 0 ] , IMG_WIDTH/10 )) , int(gauss( point[ 1 ] , IMG_HEIGHT/10)) )
+        return ( int(gauss( point[ 0 ] , IMG_WIDTH/5 )) , int(gauss( point[ 1 ] , IMG_HEIGHT/5)) )
     
     '''
     Returns a random (r, g, b, a) value
