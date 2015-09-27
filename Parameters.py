@@ -16,10 +16,10 @@ T = 500000
 E = 500000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "haystack.png" )
-OUTPUT_DIR = "haystack"
-IMG_WIDTH = 128
-IMG_HEIGHT = 128
+IMG = pygame.image.load( "darwin.jpg" )
+OUTPUT_DIR = "darwin"
+IMG_WIDTH = 256
+IMG_HEIGHT = 256
 #-------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
