@@ -10,12 +10,16 @@ def tune( dataFilename ):
     Nvalues = [1, 2, 4, 8]
     Kvalues = [1, 2, 4, 8]
     
+    print "Starting"
     for n in Nvalues:
+        print n
         for k in Kvalues:
-            t = int((E - N)/T)
+            print k
             N = n
             K = k
+            t = int((E - N)/K)
             T = t
+            print T
             results = Search.search()
             f = open( dataFilename , 'a' )
             f.write( str( N ) + " " + str( K ) + " " + str( T ) + " " + str( results[ 0 ].get_fitness() ) )
