@@ -16,6 +16,7 @@ T = 500000
 E = 500000
 
 #---Change when image changes---#
+<<<<<<< HEAD
 IMG = pygame.image.load( "haystack.png" )
 OUTPUT_DIR = "haystack"
 IMG_WIDTH = 128
