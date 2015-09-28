@@ -12,14 +12,14 @@ from Utils import convertToPixelArray, norm
 P = 100
 N = 1
 K = 1
-T = 500000
-E = 500000
+T = 300000
+E = 25000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "darwin.bmp" )
+IMG = pygame.image.load( "haystack.jpg" )
 OUTPUT_DIR = "tmp"
-IMG_WIDTH = 216
-IMG_HEIGHT = 174
+IMG_WIDTH = 96
+IMG_HEIGHT = 96
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
 IMG_PIXEL_ARRAY_NORM = norm( IMG_PIXEL_ARRAY )

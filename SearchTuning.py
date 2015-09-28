@@ -3,8 +3,7 @@ Created on Sep 27, 2015
 
 @author: mjchao
 '''
-from Parameters import N, K, T, E
-from Search import Search
+import Parameters
 
 def tune( dataFilename ):
     Nvalues = [1, 2, 4, 8]
@@ -15,15 +14,16 @@ def tune( dataFilename ):
         print n
         for k in Kvalues:
             print k
-            N = n
-            K = k
-            t = int((E - N)/K)
-            T = t
-            print T
+            Parameters.N = n
+            Parameters.K = k
+            t = int((Parameters.E - Parameters.N)/Parameters.K)
+            Parameters.T = t
+            print Parameters.T
+            from Search import Search
             results = Search.search()
             f = open( dataFilename , 'a' )
-            f.write( str( N ) + " " + str( K ) + " " + str( T ) + " " + str( results[ 0 ].get_fitness() ) )
+            f.write( str( Parameters.N ) + " " + str( Parameters.K ) + " " + str( Parameters.T ) + " " + str( results[ 0 ].get_fitness() ) + "\n" )
             f.close()
     
 
-tune( "mona_lisa_tuning.out" )
+tune( "haystack_tuning.out" )
