@@ -6,8 +6,8 @@
 <body>
 <p>
 EECS 492 A1 Results<br>
-Steve Chapel<br>
-September 18, 2011<br>
+Mickey Chao<br>
+September 29, 2015<br>
 </p>
 <h2>A1 Results</h2>
 <p>
@@ -33,35 +33,35 @@ The 3D graphs depict how the fitness after 25000 generations varies with N and K
 <td>216&times;174 pixels<br><img src="darwin.bmp"></td>
 <td>P=100, N=1, K=1<br><img src="darwin/darwin_anim.png"></td>
 <td><img src="darwin_fitness.png"></td>
-<td><img width=400 height=400 src="im_darwin3d.svg"><br>N=4, K=2 gave the best result<td>
+<td><img width=400 height=400 src="darwin_tuning.png"><br>N=8, K=8 gave the best result<td>
 </tr>
 
 <tr>
 <td>128&times;128 pixels<br><img src="haystack.jpg"></td>
 <td>P=100, N=1, K=1<br><img src="haystack/haystack_anim.png"></td>
 <td><img src="haystack_fitness.png"></td>
-<td><img width=400 height=400 src="images3d.svg"><br>N=4, K=1 gave the best result<td>
+<td><img width=400 height=400 src="haystack_tuning.png"><br>N=4, K=1 gave the best result<td>
 </tr>
 
 <tr>
 <td>328&times;189 pixels<br><img src="michigan.bmp"></td>
 <td>P=100, N=1, K=1<br><img src="michigan/michigan_anim.png"></td>
 <td><img src="michigan_fitness.png"></td>
-<td><img width=400 height=400 src="scream3d.svg"><br>N=2, K=1 gave the best result</td>
+<td><img width=400 height=400 src="michigan_tuning.png"><br>N=4, K=1 gave the best result</td>
 </tr>
 
 <tr>
 <td>32&times;32 pixels<br><img src="mona_lisa.bmp"></td>
 <td>P=100, N=1, K=1<br><img src="mona_lisa/mona_lisa_anim.png"></td>
 <td><img src="mona_lisa_fitness.png"></td>
-<td><img width=400 height=400 src="mona-lisa3d.svg"><br>N=1, K=2 gave the best result</td>
+<td><img width=400 height=400 src="mona_lisa_tuning.png"><br>N=2, K=2 gave the best result</td>
 </tr>
 
 <tr>
 <td>128&times;128 pixels<br><img src="turing.jpg"></td>
 <td>P=100, N=1, K=1<br><img src="turing/turing_anim.png"></td>
 <td><img src="turing_fitness.png"></td>
-<td><img width=400 height=400 src="darwin3d.svg"><br>N=2, K=1 gave the best result</td>
+<td><img width=400 height=400 src="turing_tuning.png"><br>N=2, K=1 gave the best result</td>
 </tr>
 
 </table>
@@ -79,18 +79,18 @@ Mutations used:
 <li>With 1/2 probability, alter the shape of the polygon:
 <ul>
 <li>With 1/3 probability, remove a vertex.</li>
-<li>With 1/3 probability, add a vertex close to an edge.</li>
+<li>With 1/3 probability, add a vertex at a random point.</li>
 <li>With 1/3 probability, move a vertex slightly.</li>
 </ul></li>
 </ul></li>
 </ul>
-Coordinates of vertices were moved using a Gaussian distribution of mean 0 and standard deviation 5 pixels.
-Components of colors (0.0 to 1.0 scale) were altered using a Gaussian distribution of mean 0 and standard deviation 0.05.
+Coordinates of vertices were moved using a Gaussian distribution of mean 0 and standard deviation IMG_SIZE/5 pixels.
+Components of colors (0-255 scale) were altered using a Gaussian distribution of mean 0 and standard deviation 25.
 </p>
 <p>
 Random triangles were created by picking a point on the image with uniform distribution,
 then adding a Gaussian distribution of mean 0 and
-standard deviation 20% of the image width to the point to obtain the vertices.
+standard deviation IMG_SIZE/10 of the image width to the point to obtain the vertices.
 Random colors were picked using uniform distribution over the RGB color space.
 </p>
 <p>
