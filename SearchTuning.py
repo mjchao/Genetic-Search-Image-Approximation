@@ -26,4 +26,4 @@ def tune( dataFilename ):
             f.close()
     
 
-tune( "haystack_tuning.out" )
+tune( "turing_tuning.out" )
