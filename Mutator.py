@@ -110,7 +110,7 @@ class Mutator( object ):
     '''
     @staticmethod   
     def __mutate_alter_shape__( code ):
-        mutationsList = [ Mutator.__mutate4__ , Mutator.__mutate6__ ]
+        mutationsList = [ Mutator.__mutate4__ ,Mutator.__mutate5__ , Mutator.__mutate6__ ]
         mutationIdx = randint( 0 , len( mutationsList)-1 )
         mutationsList[ mutationIdx ]( code )
         

@@ -20,6 +20,7 @@ IMG = pygame.image.load( "turing.jpg" )
 OUTPUT_DIR = "tmp"
 IMG_WIDTH = 128
 IMG_HEIGHT = 128
+#--------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
 IMG_PIXEL_ARRAY_NORM = norm( IMG_PIXEL_ARRAY )

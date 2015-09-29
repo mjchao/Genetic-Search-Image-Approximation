@@ -72,7 +72,54 @@ class Plot( object ):
         ax.set_zlabel( "Fitness" )
         plt.show()
          
+    @staticmethod
+    def plot_tuning_average( files ):
+        indices = {
+                   1:0 ,
+                   2:1 ,
+                   4:2 ,
+                   8:3 ,
+        }
+        xPlot , yPlot = np.meshgrid( [1, 2, 4, 8], [1, 2, 4, 8] )
+        zPlot = [[0 for _ in range(4)] for _ in range(4)]
+        for filename in files:
+            f = open( filename , 'r' )
+            for line in f.readlines():
+                data = [float(s) for s in line.split( " " ) ]
+                n = data[ 0 ]
+                k = data[ 1 ]
+                fitness = data[ 3 ]
+                xIndex = indices[ n ]
+                yIndex = indices[ k ]
+                zPlot[ xIndex ][ yIndex ] += fitness
+         
+        maxFitness = 0
+        maxIdx = ( -1, -1 )
+        for i in range(4):
+            for j in range(4):
+                zPlot[ i ][ j ] = zPlot[ i ][ j ] / float(len( files ))
+                if ( zPlot[ i ][ j ] > maxFitness ):
+                    maxFitness = zPlot[ i ][ j ] 
+                    maxIdx = (i, j)   
+                
+        print maxFitness
+        print maxIdx  
+        #zPlot = zPlot / float(len( files ))
+        #print np.max( zPlot )
+        #print np.argmax( zPlot )
+        
+        fig = plt.figure()
+        ax = fig.gca(projection='3d')
+        ax.plot_surface(xPlot, yPlot, zPlot , linewidth=1 , rstride=1, cstride=1 , cmap = cm.coolwarm , antialiased=False)
+        ax.set_xlabel( "N" )
+        ax.set_ylabel( "K" )
+        ax.set_zlabel( "Average Fitness" )
+        plt.show()
+                
+         
+    
 #Plot.plot_data( "haystack.out" )
-Plot.plot_tuning( "haystack_tuning.out" )
+#Plot.plot_tuning( "turing_tuning.out" )
+Plot.plot_tuning_average([ "darwin_tuning.out" , "haystack_tuning.out" , "michigan_tuning.out" , "mona_lisa_tuning.out" , "turing_tuning.out"] )
     
         
