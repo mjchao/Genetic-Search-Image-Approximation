@@ -16,10 +16,11 @@ T = 300000
 E = 25000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "turing.jpg" )
+IMG = pygame.image.load( "../html/michigan.bmp" )
 OUTPUT_DIR = "tmp"
 IMG_WIDTH = 128
 IMG_HEIGHT = 128
+#--------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
 IMG_PIXEL_ARRAY_NORM = norm( IMG_PIXEL_ARRAY )
