@@ -17,7 +17,7 @@ E = 25000
 
 #---Change when image changes---#
 IMG = pygame.image.load( "turing.jpg" )
-OUTPUT_DIR = "tmp"
+OUTPUT_DIR = "turing"
 IMG_WIDTH = 128
 IMG_HEIGHT = 128
 #--------------------------#
