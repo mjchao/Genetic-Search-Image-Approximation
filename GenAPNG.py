@@ -12,4 +12,4 @@ def gen( directory ):
     
     print cmd
     
-gen( "mona_lisa" )
+gen( "turing" )
