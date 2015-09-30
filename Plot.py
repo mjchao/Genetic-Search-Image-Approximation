@@ -118,7 +118,7 @@ class Plot( object ):
                 
          
     
-Plot.plot_data( "darwin.out" )
+Plot.plot_data( "haystack.out" )
 #Plot.plot_tuning( "turing_tuning.out" )
 #Plot.plot_tuning_average([ "darwin_tuning.out" , "haystack_tuning.out" , "michigan_tuning.out" , "mona_lisa_tuning.out" , "turing_tuning.out"] )
     

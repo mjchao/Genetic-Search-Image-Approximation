@@ -88,16 +88,37 @@ Coordinates of vertices were moved using a Gaussian distribution of mean 0 and s
 Components of colors (0-255 scale) were altered using a Gaussian distribution of mean 0 and standard deviation 25.
 </p>
 <p>
+At office hours, I was advised to use the same mutations as the sample because my images weren't coming out nicely:
+<ul>
+<li>With 1/5 probability, replace a polygon with a random triangle.</li>
+<li>With 1/5 probability, swap the order of two polygons which are in adjacent depth layers.</li>
+<li>With 3/5 probability, mutate an existing polygon:
+<ul>
+<li>With 1/2 probability, alter the color slightly.</li>
+<li>With 1/2 probability, alter the shape of the polygon:
+<ul>
+<li>With 1/3 probability, remove a vertex.</li>
+<li>With 1/3 probability, add a vertex at a random point.</li>
+<li>With 1/3 probability, move a vertex slightly.</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>
+However, this did not solve the problem. It turned out I hadn't been using the pygame draw functionality correctly. Unfortunately, it would take several days to regenerate all the animations, so I stuck with these mutations.
+</p>
+
+Coordinates of vertices were moved using a Gaussian distribution of mean 0 and standard deviation IMG_SIZE/5 pixels.
+Components of colors (0-255 scale) were altered using a Gaussian distribution of mean 0 and standard deviation 25.
+</p>
+<p>
 Random triangles were created by picking a point on the image with uniform distribution,
 then adding a Gaussian distribution of mean 0 and
-standard deviation IMG_SIZE/10 of the image width to the point to obtain the vertices.
+standard deviation IMG_SIZE/10 to obtain the vertices.
 Random colors were picked using uniform distribution over the RGB color space.
 </p>
 <p>
-Parents were selected from an array of individuals sorted in decreasing order of fitness
-using the index <code>Rand.nextInt(Rand.nextInt(n) + 1)</code> where Rand.nextInt(m) returns a
-random integer uniformly distributed between 0 and m-1 inclusive. This made the more fit individuals
-more likely to be chosen for crossover.
+Parents were selected proportional to their fitness. This was done with a weighted average where if parent i has f_i fitness, and the sum of the fitness over all parents was f, then parent i has probability f_i/f of being selected.
 </p>
 </body>
 </html>
