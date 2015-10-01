@@ -13,13 +13,13 @@ P = 100
 N = 1
 K = 1
 T = 500000
-E = 500000
+E = 25000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "mona_lisa.bmp" )
-OUTPUT_DIR = "mona_lisa"
-IMG_WIDTH = 32
-IMG_HEIGHT = 32
+IMG = pygame.image.load( "turing.jpg" )
+OUTPUT_DIR = "tmp"
+IMG_WIDTH = 128
+IMG_HEIGHT = 128
 #--------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )

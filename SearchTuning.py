@@ -6,8 +6,8 @@ Created on Sep 27, 2015
 import Parameters
 
 def tune( dataFilename ):
-    Nvalues = [1, 2, 4, 8]
-    Kvalues = [1, 2, 4, 8]
+    Nvalues = [8]
+    Kvalues = [4, 8]
     
     print "Starting"
     for n in Nvalues:
@@ -26,4 +26,4 @@ def tune( dataFilename ):
             f.close()
     
 
-tune( "turing_tuning.out" )
+tune( "mjchao_tuning.out" )
