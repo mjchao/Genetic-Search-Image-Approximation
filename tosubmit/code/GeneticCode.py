@@ -80,7 +80,9 @@ class GeneticCode( object ):
     '''
     def draw_onto_surface( self , surf ):
         for polygon in self._polygons:
-            polygon.draw_onto_surface( surf )
+            polygonSurf = pygame.Surface( (IMG_WIDTH , IMG_HEIGHT) , flags = pygame.SRCALPHA )
+            polygon.draw_onto_surface( polygonSurf )
+            surf.blit( polygonSurf , (0,0) )
             
     '''
     Must use a static surface because pygame runs out of memory if we make

@@ -30,45 +30,52 @@ The 3D graphs depict how the fitness after 25000 generations varies with N and K
 </tr>
 
 <tr>
-<td>216&times;174 pixels<br><img src="darwin.bmp"></td>
+<td>80&times;80 pixels<br><img src="darwin.jpg"></td>
 <td>P=100, N=1, K=1<br><img src="darwin_anim.png"></td>
 <td><img src="darwin_fitness.png"></td>
-<td><img width=400 height=400 src="darwin_tuning.png"><br>N=8, K=8 gave the best result<td>
+<td><img width=400 height=400 src="darwin_tuning.png"><br>N=1, K=8 gave the best result<td>
 </tr>
 
 <tr>
-<td>128&times;128 pixels<br><img src="haystack.jpg"></td>
+<td>100&times;100 pixels<br><img src="haystack.png"></td>
 <td>P=100, N=1, K=1<br><img src="haystack_anim.png"></td>
 <td><img src="haystack_fitness.png"></td>
-<td><img width=400 height=400 src="haystack_tuning.png"><br>N=2, K=8 gave the best result<td>
+<td><img width=400 height=400 src="haystack_tuning.png"><br>N=1, K=4 gave the best result<td>
 </tr>
 
 <tr>
-<td>328&times;189 pixels<br><img src="michigan.bmp"></td>
+<td>64&times;64 pixels<br><img src="michigan.png"></td>
 <td>P=100, N=1, K=1<br><img src="michigan_anim.png"></td>
 <td><img src="michigan_fitness.png"></td>
-<td><img width=400 height=400 src="michigan_tuning.png"><br>N=4, K=1 gave the best result</td>
+<td><img width=400 height=400 src="michigan_tuning.png"><br>N=2, K=1 gave the best result</td>
 </tr>
 
 <tr>
 <td>32&times;32 pixels<br><img src="mona_lisa.bmp"></td>
 <td>P=100, N=1, K=1<br><img src="mona_lisa_anim.png"></td>
 <td><img src="mona_lisa_fitness.png"></td>
-<td><img width=400 height=400 src="mona_lisa_tuning.png"><br>N=2, K=2 gave the best result</td>
+<td><img width=400 height=400 src="mona_lisa_tuning.png"><br>N=8, K=8 gave the best result</td>
+</tr>
+
+<tr>
+<td>96&times;128 pixels<br><img src="mjchao.jpg"></td>
+<td>P=100, N=1, K=1<br><img src="mjchao_anim.png"></td>
+<td><img src="mjchao_fitness.png"></td>
+<td><img width=400 height=400 src="mjchao_tuning.png"><br>N=1, K=2 gave the best result</td>
 </tr>
 
 <tr>
 <td>128&times;128 pixels<br><img src="turing.jpg"></td>
 <td>P=100, N=1, K=1<br><img src="turing_anim.png"></td>
-<td><img src="turing_fitness.png"></td>
+<td><img src="turing_fitness.png">(Note: The process exceeded 6 hours on CAEN and was killed before 500000 generations)</td>
 <td><img width=400 height=400 src="turing_tuning.png"><br>N=4, K=2 gave the best result</td>
 </tr>
 
 </table>
 <img width=600 height=600 src="overall_tuning.png"><br>
-N=2, K=2 gave the best result overall after 25000 generations<br>
+N=4, K=1 gave the best result overall after 25000 generations<br>
 <hr>
-<p>
+
 At office hours, I was advised to use the same mutations as the sample because my images weren't coming out nicely:
 <ul>
 <li>With 1/5 probability, replace a polygon with a random triangle.</li>
@@ -86,16 +93,16 @@ At office hours, I was advised to use the same mutations as the sample because m
 </ul>
 
 <p>
-However, this did not solve the problem. If interested, the README will discuss this problem in greater detail and hopefully provide a convincing argument that the mutations are not the source of the poor approximations.
+However, this did not solve the problem. It turned out I hadn't been using the pygame draw functionality correctly. Unfortunately, it would take several days to regenerate all the animations, so I stuck with these mutations.
 </p>
 
-Coordinates of vertices were moved using a Gaussian distribution of mean 0 and standard deviation IMG_SIZE/5 pixels.
+Coordinates of vertices were moved in the x, y directions using a Gaussian distribution of mean 0 and standard deviation IMG_WIDTH/5 and IMG_HEIGHT/5 pixels, respectively.
 Components of colors (0-255 scale) were altered using a Gaussian distribution of mean 0 and standard deviation 25.
 </p>
 <p>
 Random triangles were created by picking a point on the image with uniform distribution,
 then adding a Gaussian distribution of mean 0 and
-standard deviation IMG_SIZE/10 to obtain the vertices.
+standard deviation IMG_WIDTH/10 and IMG_HEIGHT/10 to obtain the (x, y) coordinates of vertices.
 Random colors were picked using uniform distribution over the RGB color space.
 </p>
 <p>

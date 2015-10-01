@@ -12,14 +12,14 @@ from Utils import convertToPixelArray, norm
 P = 100
 N = 1
 K = 1
-T = 300000
+T = 500000
 E = 25000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "../html/michigan.bmp" )
+IMG = pygame.image.load( "turing.jpg" )
 OUTPUT_DIR = "tmp"
-IMG_WIDTH = 328
-IMG_HEIGHT = 189
+IMG_WIDTH = 128
+IMG_HEIGHT = 128
 #--------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
