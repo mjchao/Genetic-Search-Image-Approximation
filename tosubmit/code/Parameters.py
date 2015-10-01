@@ -13,10 +13,10 @@ P = 100
 N = 1
 K = 1
 T = 500000
-E = 25000
+E = 500000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "turing.jpg" )
+IMG = pygame.image.load( "../turing.jpg" )
 OUTPUT_DIR = "tmp"
 IMG_WIDTH = 128
 IMG_HEIGHT = 128
