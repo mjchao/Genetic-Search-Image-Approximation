@@ -16,10 +16,10 @@ T = 500000
 E = 500000
 
 #---Change when image changes---#
-IMG = pygame.image.load( "../turing.jpg" )
+IMG = pygame.image.load( "../html/mona_lisa.bmp" )
 OUTPUT_DIR = "tmp"
-IMG_WIDTH = 128
-IMG_HEIGHT = 128
+IMG_WIDTH = 32
+IMG_HEIGHT = 32
 #--------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )
