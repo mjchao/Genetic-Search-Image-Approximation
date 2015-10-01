@@ -61,13 +61,13 @@ The 3D graphs depict how the fitness after 25000 generations varies with N and K
 <td>96&times;128 pixels<br><img src="mjchao.jpg"></td>
 <td>P=100, N=1, K=1<br><img src="mjchao/mjchao_anim.png"></td>
 <td><img src="mjchao_fitness.png"></td>
-<td><img width=400 height=400 src="turing_tuning.png"><br>N=4, K=2 gave the best result</td>
+<td><img width=400 height=400 src="mjchao_tuning.png"><br>N=1, K=2 gave the best result</td>
 </tr>
 
 <tr>
 <td>128&times;128 pixels<br><img src="turing.jpg"></td>
 <td>P=100, N=1, K=1<br><img src="turing/turing_anim.png"></td>
-<td><img src="turing_fitness.png"></td>
+<td><img src="turing_fitness.png">(Note: The process exceeded 6 hours on CAEN and was killed before 500000 generations)</td>
 <td><img width=400 height=400 src="turing_tuning.png"><br>N=4, K=2 gave the best result</td>
 </tr>
 
@@ -115,13 +115,13 @@ At office hours, I was advised to use the same mutations as the sample because m
 However, this did not solve the problem. It turned out I hadn't been using the pygame draw functionality correctly. Unfortunately, it would take several days to regenerate all the animations, so I stuck with these mutations.
 </p>
 
-Coordinates of vertices were moved using a Gaussian distribution of mean 0 and standard deviation IMG_SIZE/5 pixels.
+Coordinates of vertices were moved in the x, y directions using a Gaussian distribution of mean 0 and standard deviation IMG_WIDTH/5 and IMG_HEIGHT/5 pixels, respectively.
 Components of colors (0-255 scale) were altered using a Gaussian distribution of mean 0 and standard deviation 25.
 </p>
 <p>
 Random triangles were created by picking a point on the image with uniform distribution,
 then adding a Gaussian distribution of mean 0 and
-standard deviation IMG_SIZE/10 to obtain the vertices.
+standard deviation IMG_WIDTH/10 and IMG_HEIGHT/10 to obtain the (x, y) coordinates of vertices.
 Random colors were picked using uniform distribution over the RGB color space.
 </p>
 <p>
