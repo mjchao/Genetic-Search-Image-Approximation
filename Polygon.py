@@ -4,12 +4,10 @@ Created on Sep 12, 2015
 @author: mjchao
 '''
 
-import pygame
 from Parameters import IMG_WIDTH , IMG_HEIGHT
-from pygame.locals import QUIT , KEYDOWN , K_ESCAPE
+from PIL import Image, ImageDraw
 from random import randint , gauss
 import Utils
-from Utils import renderPolygon
 
 '''
 Represents a polygon with some vertices and filled with a given color.
@@ -76,20 +74,6 @@ class Polygon( object ):
             self._color = color
         
     '''
-    Draws this polygon onto a surface
-    '''
-    def draw_onto_surface( self , surface ):
-        pygame.draw.polygon( surface , self._color , self._vertices , 0 )
-        
-    '''
-    Draws this polygon onto the screen.
-    '''
-    def draw( self , display ):
-        surface = pygame.surface.Surface( (IMG_WIDTH, IMG_HEIGHT) , flags = pygame.SRCALPHA )
-        pygame.draw.polygon( surface , self._color , self._vertices , 0 )
-        display.blit( surface , (0, 0) )
-     
-    '''
     Returns the number of vertices this polygon has. 
     '''   
     def num_vertices( self ):
@@ -109,31 +93,6 @@ class Polygon( object ):
         self._color = color
         
     def __str__( self ):
-        return "Polygon { Vertices = " + str( self._vertices ) + ", Color = " + str( self._color ) + "}"
-
-'''
-Unit testing
-'''
-def main():
-    test1 = Polygon.rand_triangle( IMG_WIDTH , IMG_HEIGHT )
-    test2 = Polygon( [ (0, 0) , (0, 10) , (10, 10) ] , (0 , 0 , 0 , 1 ) )
-    pygame.init()
-    screen = pygame.display.set_mode( (100, 100) )
-    screen.fill( (255, 255, 255) )
-    test1.draw( screen )
-    test2.draw( screen )
-    pygame.display.update()
-    
-    print test1
-    print test2
-    state = 0
-    while state == 0:
-        pygame.display.update()
-        
-        for event in pygame.event.get():
-            if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                state = 1
-                break
-    
+        return "Polygon { Vertices = " + str( self._vertices ) + ", Color = " + str( self._color ) + "}"    
     
 if __name__ == "__main__" : main()

@@ -7,11 +7,12 @@ from Mutator import Mutator
 from Parameters import IMG_WIDTH , IMG_HEIGHT , P, IMG_PIXEL_ARRAY , IMG_PIXEL_ARRAY_NORM
 from Polygon import Polygon
 
+from PIL import Image, ImageDraw
+
 import random
 from random import uniform
 from math import log10
 import copy
-import pygame
 from Utils import convertToPixelArray, euclideanDistance, norm , save_surface
 import sys
 
@@ -67,29 +68,20 @@ class GeneticCode( object ):
     '''
     def set( self , idx , newPolygon ):
         self._polygons[ idx ] = newPolygon
-        
-    '''
-    Draws the image represented by this genetic code onto a screen.
-    '''
-    def draw_onto_screen( self , display ):
-        for polygon in self._polygons:
-            polygon.draw( display )
             
     '''
     Draws the image represented by this genetic code onto a surface.
     '''
     def draw_onto_surface( self , surf ):
+        #polygon_surf = Image.new("RGBA", (IMG_WIDTH, IMG_HEIGHT), (0, 0, 0, 255))
+        #for polygon in self._polygons:
+        #    polygon.draw_onto_surface( polygon_surf )
+        #    surf.paste(polygon_surf, mask=polygon_surf)
+        d = ImageDraw.Draw(self._surface, "RGBA")
         for polygon in self._polygons:
-            polygonSurf = pygame.Surface( (IMG_WIDTH , IMG_HEIGHT) , flags = pygame.SRCALPHA )
-            polygon.draw_onto_surface( polygonSurf )
-            surf.blit( polygonSurf , (0,0) )
+            d.polygon(polygon._vertices, polygon._color)
+        del d
             
-    '''
-    Must use a static surface because pygame runs out of memory if we make
-    multiply surfaces
-    '''
-    surface = pygame.surface.Surface( (IMG_WIDTH , IMG_HEIGHT) , flags = pygame.SRCALPHA )
-    
     '''
     Returns the fitness score of this genetic code.
     '''
@@ -97,9 +89,9 @@ class GeneticCode( object ):
         if ( self._fitness != -1 ):
             return self._fitness
         else:
-            GeneticCode.surface.fill( (0,0,0) ) 
-            self.draw_onto_surface( GeneticCode.surface )
-            pixelArray = convertToPixelArray( GeneticCode.surface )
+            self._surface = Image.new("RGB", (IMG_WIDTH, IMG_HEIGHT))
+            self.draw_onto_surface( self._surface )
+            pixelArray = convertToPixelArray( self._surface )
             euclideanDist = euclideanDistance( pixelArray , IMG_PIXEL_ARRAY )
             self._fitness = -(log10( euclideanDist ) - log10(norm( pixelArray ) + IMG_PIXEL_ARRAY_NORM ) )
             return self._fitness
