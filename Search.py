@@ -91,22 +91,5 @@ class Search( object ):
    
 def main(): 
     codes = Search.search()
-    pygame.init()
-    screen = pygame.display.set_mode( (32, 32) )
-    screen.fill( (0, 0, 0) )
-    codes[ 0 ].draw_onto_screen( screen )
-    save_surface( screen , OUTPUT_DIR + "/" + "final.bmp" )
-    pygame.display.update()
-    
-    state = 0
-    while state == 0:
-        pygame.display.update()
-        
-        for event in pygame.event.get():
-            if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                state = 1
-                break
-            
-        state = 1
         
 if __name__ == "__main__" : main()
