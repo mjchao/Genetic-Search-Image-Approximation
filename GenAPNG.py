@@ -25,6 +25,7 @@ def genExp(directory):
 		pngFiles.append(pngFile)
 		genNum *= 1.01
 		genNum += 1
+	pngFiles.append("mjchao.png")
 
 	for i in range(len(pngFiles)):
 		cmd += pngFiles[i] + " "
@@ -34,4 +35,4 @@ def genExp(directory):
 	print cmd
 	
     
-genExp( "tmp2" )
+genExp( "mjchao2" )
