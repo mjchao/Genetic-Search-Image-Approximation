@@ -9,17 +9,17 @@ from Utils import convertToPixelArray, norm
 #list of global parameter constants
 
 
-P = 100
+P = 200
 N = 1
 K = 1
-T = 500000
+T = 100000000
 E = 25000
 
 #---Change when image changes---#
-IMG = Image.open( "mona_lisa.bmp" ).convert("RGBA")
-OUTPUT_DIR = "tmp"
-IMG_WIDTH = 32
-IMG_HEIGHT = 32
+IMG = Image.open( "mjchao.jpg" ).convert("RGBA")
+OUTPUT_DIR = "tmp2"
+IMG_WIDTH = 96
+IMG_HEIGHT = 128
 #--------------------------#
 
 IMG_PIXEL_ARRAY = convertToPixelArray( IMG )

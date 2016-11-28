@@ -11,5 +11,27 @@ def gen( directory ):
         cmd += pngFile + " "
     
     print cmd
+
+def genExp(directory):
+	cmd = "python pngmerge.py -o anim.png -dn 15 "
+	#cmd += "mjchao.png "
+	genNum = 1
+
+	pngFiles = []
+	for i in range(0 , 10000):
+		if genNum*1000 > 7000000:
+			break
+		pngFile = directory + "/" + str(int(genNum) * 1000) + ".png"
+		pngFiles.append(pngFile)
+		genNum *= 1.01
+		genNum += 1
+
+	for i in range(len(pngFiles)):
+		cmd += pngFiles[i] + " "
+	for i in range(len(pngFiles)-1, 0, -1):
+		cmd += pngFiles[i] + " "
+
+	print cmd
+	
     
-gen( "mjchao" )
+genExp( "tmp2" )
